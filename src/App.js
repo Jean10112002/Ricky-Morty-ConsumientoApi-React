@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
-
+import Characters from './pages/Characters'
+import  'bootswatch/dist/lumen/bootstrap.css'
+import 'bootstrap/dist/js/bootstrap.bundle'
+import Nav from './components/Nav'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+import Profile from './pages/Profile';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Nav/>
+      <Switch>
+          <Route path="/" exact>
+            <Characters/>
+          </Route>
+          <Route path="/profile/:id">
+            <Profile/>   
+          </Route>
+          <Route path="*">
+            <h1 className="text-center text-danger mt-5">Page not found</h1>
+          </Route>
+        </Switch>
+      
+    </Router>
   );
 }
 
