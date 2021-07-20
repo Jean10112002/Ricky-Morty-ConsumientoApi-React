@@ -20,9 +20,9 @@ const Profile = () => {
   }, [id,peticion]);
 
   return (
-    <article>
-      <div className="row container">
-        <div className="col-md-8 mx-auto col-auto mt-5">
+    <article className="container-fluid">
+      <div className="row ">
+        <div className="col-md-8 mx-auto col-12 mt-5">
           {personaje ? (
             <section
               className="card mb-3 shadow"
@@ -40,8 +40,7 @@ const Profile = () => {
                   <div className="col-md-8">
                     <div className="card-body">
                       <h4 className="card-title text-center text-warning">
-                        {" "}
-                        {personaje.name}{" "}
+                        {personaje.name}
                       </h4>
                       <p className="card-text">Genero: {personaje.gender}</p>
                       <p className="card-text">Especie: {personaje.species}</p>
