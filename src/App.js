@@ -3,7 +3,7 @@ import  'bootswatch/dist/lumen/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.bundle'
 import Nav from './components/Nav'
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
   Route
 } from "react-router-dom";

@@ -3,11 +3,11 @@ import {Link} from 'react-router-dom'
 const Card = ({ data }) => {
   return (
     <article>
-      <div className="row mt-md-2 mt-2 g-4">
+      <div className="row mt-md-2 mt-2 g-3 g-md-3 ">
         {data ? (
           data?.map((p) => (
-            <div className="col-md-auto col-auto mx-md-0 mx-auto " key={p.id}>
-              <section className="card shadow-lg p-2" style={{width:'15em'}}>
+            <div className="col-md-2 col-6 mx-md-0 mx-auto "  key={p.id}>
+              <section className="card w-100 shadow-lg p-2" >
                 <div className="card-header">
                   <h4 className="text-center text-secondary">{p.name}</h4>
                 </div>
