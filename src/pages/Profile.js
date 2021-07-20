@@ -1,23 +1,35 @@
-import React,{useState,useEffect, useCallback} from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
-import { useParams,Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+import CardCharacteres from "../components/CardCharacteres";
 const Profile = () => {
   const [personaje, setPersonaje] = useState(null);
+  const [capitulos, setCapitulos] = useState([]);
   const { id } = useParams();
 
-  const peticion = useCallback(async()=>{
-        const peti = await fetch(
-          "https://rickandmortyapi.com/api/character/" + id
-        );
-        const json = await peti.json();
-        setPersonaje(json);
-  },[id])
-
- 
+  const peticion = useCallback(async () => {
+    const peti = await fetch("https://rickandmortyapi.com/api/character/" + id);
+    const json = await peti.json();
+    setPersonaje(json);
+  }, [id]);
 
   useEffect(() => {
     peticion();
-  }, [id,peticion]);
+  }, [id, peticion]);
+
+  const onClickCapitulos = () => {
+    if(capitulos.length<=0){
+      personaje.episode.map(async (e) => {
+        const peticion = await fetch(e);
+        await peticion
+          .json()
+          .then((res) => {
+            setCapitulos((capitulos) => [...capitulos, res]);
+          })
+          .catch((err) => console.log(err));
+      });
+    }
+  };
 
   return (
     <article className="container-fluid">
@@ -67,8 +79,13 @@ const Profile = () => {
                           Created: {personaje.created}
                         </small>
                       </p>
+                      <button
+                        className="btn btn-secondary btn-sm d-block mt-5 mx-auto"
+                        onClick={onClickCapitulos}
+                      >
+                        Click para ver los capitulos en los que participa
+                      </button>
                     </div>
-                    
                   </div>
                 </>
               </div>
@@ -86,6 +103,7 @@ const Profile = () => {
           )}
         </div>
       </div>
+      <CardCharacteres capitulos={capitulos} />
 
       <Link
         to="/"
